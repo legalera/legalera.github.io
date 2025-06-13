@@ -1,7 +1,32 @@
-body { font-family: Arial, sans-serif; margin: 2em; }
-#chat { border: 1px solid #ccc; padding: 1em; height: 400px; overflow-y: auto; margin-bottom: 1em; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 2em;
+  background: #f9f9f9;
+}
+
+#chat {
+  border: 1px solid #ccc;
+  padding: 1em;
+  height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1em;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
 .user { color: blue; }
 .bot { color: green; }
+
+#input, #send {
+  font-size: 1em;
+  padding: 0.7em;
+  margin-bottom: 0.5em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
 #input { width: 80%; }
 #send { width: 18%; }
 
@@ -25,4 +50,29 @@ body { font-family: Arial, sans-serif; margin: 2em; }
 }
 .message-bubble p {
   margin: 6px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  body {
+    margin: 0.5em;
+  }
+  #chat {
+    height: 60vw;
+    min-height: 200px;
+    font-size: 1em;
+    padding: 0.5em;
+  }
+  #input, #send {
+    width: 100%;
+    margin: 0 0 0.5em 0;
+    box-sizing: border-box;
+    display: block;
+  }
+  #input {
+    margin-bottom: 0.5em;
+  }
+  #send {
+    width: 100%;
+  }
 }
