@@ -30,6 +30,12 @@ body {
 #input { width: 80%; }
 #send { width: 18%; }
 
+.message-bubble {
+  margin: 6px 0;
+  word-break: break-word;
+  white-space: pre-line;
+}
+
 .message-bubble pre, .message-bubble code {
   background: #16181e;
   color: #9cdcfe;
