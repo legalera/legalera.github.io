@@ -4,7 +4,7 @@ const sendBtn = document.getElementById('send');
 
 let thinkingInterval = null;
 
-function typeWriterEffect(element, message, sender = 'bot', speed = 40) {
+function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
   const prefix = sender === 'bot' ? 'LSHI AI: ' : 'Anda: ';
   let i = 0;
   function typing() {
@@ -44,7 +44,7 @@ function showThinkingAnimation() {
   let dots = 0;
   thinkingInterval = setInterval(() => {
     dots = (dots + 1) % 4;
-    bubble.textContent = 'LSHI AI sedang berpikir' + '.'.repeat(dots);
+    bubble.textContent = 'LSHI AI sedang menganalisis' + '.'.repeat(dots);
   }, 500);
   return thinkingRow;
 }
