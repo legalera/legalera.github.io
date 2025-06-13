@@ -5,7 +5,7 @@ const sendBtn = document.getElementById('send');
 let thinkingInterval = null;
 
 function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
-  const prefix = sender === 'bot' ? 'LSHI AI: ' : 'Anda: ';
+  const prefix = sender === 'bot' ? 'Lexera AI: ' : 'Anda: ';
   let i = 0;
   function typing() {
     if (i <= message.length) {
@@ -13,7 +13,7 @@ function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
       i++;
       setTimeout(typing, speed);
     } else {
-      element.innerHTML = marked.parse((sender === 'bot' ? '**LSHI AI:** ' : '**Anda:** ') + message);
+      element.innerHTML = marked.parse((sender === 'bot' ? '**Lexera AI:** ' : '**Anda:** ') + message);
     }
   }
   typing();
@@ -28,7 +28,7 @@ function addMessage(message, sender = 'user', useTypewriter = false) {
   if (sender === 'bot' && useTypewriter) {
     typeWriterEffect(bubble, message, sender);
   } else {
-    const prefix = sender === 'bot' ? '**LSHI AI:** ' : '**Anda:** ';
+    const prefix = sender === 'bot' ? '**Lexera AI:** ' : '**Anda:** ';
     bubble.innerHTML = marked.parse(prefix + (message || ""));
   }
   row.appendChild(bubble);
@@ -44,7 +44,7 @@ function showThinkingAnimation() {
   let dots = 0;
   thinkingInterval = setInterval(() => {
     dots = (dots + 1) % 4;
-    bubble.textContent = 'LSHI AI sedang menganalisis' + '.'.repeat(dots);
+    bubble.textContent = 'Lexera AI sedang menganalisis' + '.'.repeat(dots);
   }, 500);
   return thinkingRow;
 }
