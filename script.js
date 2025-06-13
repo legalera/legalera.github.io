@@ -2,17 +2,18 @@ const chatWindow = document.getElementById('chat');
 const inputBox = document.getElementById('input');
 const sendBtn = document.getElementById('send');
 
-function typeWriterEffect(element, html, speed = 25) {
-  // Parse the markdown to HTML first, then animate
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
-  const fullText = tempDiv.innerHTML;
+function typeWriterEffect(element, message, sender = 'bot', speed = 25) {
+  // Prefix (plain, not markdown)
+  const prefix = sender === 'bot' ? 'LSHI AI: ' : 'Anda: ';
   let i = 0;
   function typing() {
-    element.innerHTML = fullText.slice(0, i);
-    if (i < fullText.length) {
+    if (i <= message.length) {
+      element.textContent = prefix + message.slice(0, i);
       i++;
       setTimeout(typing, speed);
+    } else {
+      // Once done, parse as markdown for bold prefix (optional)
+      element.innerHTML = marked.parse((sender === 'bot' ? '**LSHI AI:** ' : '**Anda:** ') + message);
     }
   }
   typing();
@@ -25,14 +26,12 @@ function addMessage(message, sender = 'user', typewriter = false) {
   const bubble = document.createElement('div');
   bubble.className = 'message-bubble ' + (sender === 'bot' ? 'bot' : 'user');
    // Prefix with Markdown bold for the label
-   const prefix = sender === 'bot' ? '**LSHI AI:** ' : '**Anda:** ';
-const html = marked.parse(prefix + (message || ""));
-
-  if (sender === 'bot' && typewriter) {
-    // start typewriter effect
-    typeWriterEffect(bubble, html);
+  if (sender === 'bot' && useTypewriter) {
+    typeWriterEffect(bubble, message, sender);
   } else {
-    bubble.innerHTML = html;
+    // Markdown parse for bold label
+    const prefix = sender === 'bot' ? '**LSHI AI:** ' : '**Anda:** ';
+    bubble.innerHTML = marked.parse(prefix + (message || ""));
   }
 
   row.appendChild(bubble);
@@ -41,12 +40,11 @@ const html = marked.parse(prefix + (message || ""));
   return row; // return for possible removal
 }
 
-async function sendMessage() {
+sendBtn.onclick = async () => {
   const message = inputBox.value.trim();
   if (!message) return;
   addMessage(message, 'user');
   inputBox.value = '';
-
   // Show "Sedang berpikir..." bot message and keep reference for removal
   const thinkingRow = addMessage('Sedang berpikir...', 'bot');
   try {
@@ -63,12 +61,12 @@ async function sendMessage() {
     addMessage(`Error: ${err.message}`, 'bot');
   }
 }
-
+/*
 sendBtn.onclick = sendMessage;
 inputBox.addEventListener('keydown', e => {
   if (e.key === 'Enter') sendMessage();
 });
-
-/*inputBox.addEventListener('keydown', e => {
+*/
+inputBox.addEventListener('keydown', e => {
   if (e.key === 'Enter') sendBtn.onclick();
-});*/
+});
