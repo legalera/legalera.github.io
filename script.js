@@ -2,15 +2,23 @@ const chatWindow = document.getElementById('chat');
 const inputBox = document.getElementById('input');
 const sendBtn = document.getElementById('send');
 
-/*function appendMessage(who, text) {
-  const msg = document.createElement('div');
-  msg.className = who;
-  msg.textContent = `${who === "user" ? "You" : "Bot"}: ${text}`;
-  chatDiv.appendChild(msg);
-  chatDiv.scrollTop = chatDiv.scrollHeight;
-}*/
+function typeWriterEffect(element, html, speed = 25) {
+  // Parse the markdown to HTML first, then animate
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  const fullText = tempDiv.innerHTML;
+  let i = 0;
+  function typing() {
+    element.innerHTML = fullText.slice(0, i);
+    if (i < fullText.length) {
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
 
-function addMessage(message, sender = 'user') {
+function addMessage(message, sender = 'user', typewriter = false) {
   const row = document.createElement('div');
   row.className = 'message-row';
 
@@ -18,45 +26,29 @@ function addMessage(message, sender = 'user') {
   bubble.className = 'message-bubble ' + (sender === 'bot' ? 'bot' : 'user');
    // Prefix with Markdown bold for the label
    const prefix = sender === 'bot' ? '**LSHI AI:** ' : '**Anda:** ';
+const html = marked.parse(prefix + (message || ""));
 
-   // Always use marked.parse for both user and bot to render bold
-   bubble.innerHTML = marked.parse(prefix + (message || ""));
-  /*let prefix = sender === 'bot' ? "**LSHI AI:** " : "**Anda:** ";
-  if (sender === 'bot') {
-    bubble.innerHTML = marked.parse(prefix + message || ""); // THIS LINE is the key!
+  if (sender === 'bot' && typewriter) {
+    // start typewriter effect
+    typeWriterEffect(bubble, html);
   } else {
-    bubble.textContent = marked.parse(prefix + message || "");
-  }*/
-  row.appendChild(bubble);
-  chatWindow.appendChild(row);
-  chatWindow.scrollTop = chatWindow.scrollHeight;
-}
-
-/*function addMessage(message, sender = 'user') {
-  const row = document.createElement('div');
-  row.className = 'message-row';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'message-bubble message-' + sender;
-
-  // Render markdown for bot, plain for user
-  if (sender === 'bot') {
-    bubble.innerHTML = marked.parse(message);
-  } else {
-    bubble.textContent = message;
+    bubble.innerHTML = html;
   }
 
   row.appendChild(bubble);
   chatWindow.appendChild(row);
   chatWindow.scrollTop = chatWindow.scrollHeight;
-}*/
+  return row; // return for possible removal
+}
 
-sendBtn.onclick = async () => {
+async function sendMessage() {
   const message = inputBox.value.trim();
   if (!message) return;
   addMessage(message, 'user');
   inputBox.value = '';
-  addMessage('Sedang berpikir...','bot');
+
+  // Show "Sedang berpikir..." bot message and keep reference for removal
+  const thinkingRow = addMessage('Sedang berpikir...', 'bot');
   try {
     const res = await fetch('https://vercelapi-legaleras-projects.vercel.app/api/chat', {
       method: 'POST',
@@ -64,15 +56,19 @@ sendBtn.onclick = async () => {
       body: JSON.stringify({ message })
     });
     const data = await res.json();
-    // Remove the 'Thinking...' message
-    chatWindow.removeChild(chatWindow.lastChild);
-    addMessage(data.reply || data.response || (data.error ? `Error: ${data.error}` : 'No response'), 'bot');
+    chatWindow.removeChild(thinkingRow);
+    addMessage(data.reply || data.response || (data.error ? `Error: ${data.error}` : 'No response'), 'bot', true);
   } catch (err) {
-    chatWindow.removeChild(chatWindow.lastChild);
+    chatWindow.removeChild(thinkingRow);
     addMessage(`Error: ${err.message}`, 'bot');
   }
-};
+}
 
+sendBtn.onclick = sendMessage;
 inputBox.addEventListener('keydown', e => {
-  if (e.key === 'Enter') sendBtn.onclick();
+  if (e.key === 'Enter') sendMessage();
 });
+
+/*inputBox.addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendBtn.onclick();
+});*/
