@@ -1,0 +1,28 @@
+body { font-family: Arial, sans-serif; margin: 2em; }
+#chat { border: 1px solid #ccc; padding: 1em; height: 400px; overflow-y: auto; margin-bottom: 1em; }
+.user { color: blue; }
+.bot { color: green; }
+#input { width: 80%; }
+#send { width: 18%; }
+
+.message-bubble pre, .message-bubble code {
+  background: #16181e;
+  color: #9cdcfe;
+  padding: 8px;
+  border-radius: 6px;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-size: 0.98em;
+  overflow-x: auto;
+}
+
+.message-bubble ul, .message-bubble ol {
+  margin: 10px 0 10px 24px;
+  padding: 0;
+}
+.message-bubble h1, .message-bubble h2, .message-bubble h3 {
+  margin: 10px 0 6px 0;
+  font-weight: bold;
+}
+.message-bubble p {
+  margin: 6px 0;
+}
