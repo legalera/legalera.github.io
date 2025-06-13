@@ -58,7 +58,7 @@ sendBtn.onclick = async () => {
   inputBox.value = '';
   addMessage('Sedang berpikir...','bot');
   try {
-    const res = await fetch('/chat', {
+    const res = await fetch('https://vercelapi-seven-theta.vercel.app/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message })
