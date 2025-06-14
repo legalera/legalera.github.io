@@ -44,7 +44,7 @@ function showThinkingAnimation() {
   let dots = 0;
   thinkingInterval = setInterval(() => {
     dots = (dots + 1) % 4;
-    bubble.textContent = 'Lexera AI sedang menganalisis' + '.'.repeat(dots);
+    bubble.innerHTML = `<i>Lexera AI sedang menganalisis${'.'.repeat(dots)}</i>`;
   }, 500);
   return thinkingRow;
 }
