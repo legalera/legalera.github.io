@@ -12,6 +12,19 @@ body {
   margin: 0;
 }
 
+footer {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 0.7rem 1rem;
+  background: #fafbfc;
+  color: #888;
+  font-size: 0.93rem;
+  border-top: 1px solid #e0e3e7;
+  letter-spacing: 0.02em;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
 /* Main chat container */
 .chat-container {
   max-width: 500px;
@@ -177,6 +190,10 @@ main#chat {
   header {
     padding: 1rem 0.5rem 0.3rem 0.5rem;
   }
+  footer {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.2rem;
+  }
 }
 
 /* For very large screens (Full HD and up) */
@@ -187,5 +204,9 @@ main#chat {
     height: 90vh;
     min-height: 320px;
     border-radius: 18px;
+  }
+  footer {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.2rem;
   }
 }
