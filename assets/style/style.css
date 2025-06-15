@@ -7,7 +7,7 @@ html, body {
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f4f4f9;
+  background: #888;
   min-height: 100vh;
   margin: 0;
 }
@@ -16,13 +16,15 @@ footer {
   flex-shrink: 0;
   text-align: center;
   padding: 0.7rem 1rem;
-  background: #fafbfc;
+  background: #000;
   color: #888;
   font-size: 0.93rem;
   border-top: 1px solid #e0e3e7;
   letter-spacing: 0.02em;
-  max-width: 500px;
+  /*max-width: 500px;*/
   box-sizing: border-box;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
 }
 
 /* Main chat container */
@@ -127,7 +129,7 @@ main#chat {
   display: flex;
   padding: 1rem;
   background: #fff;
-  border-top: 1px solid #e0e3e7;
+  border-top: 5px solid #ff6600;
   gap: 0.6em;
   box-sizing: border-box;
 }
@@ -151,7 +153,7 @@ main#chat {
 
 #send {
   flex: 0 0 auto;
-  background: #4f8cff;
+  background: #ff6600;
   color: #fff;
   border: none;
   border-radius: 20px;
@@ -193,6 +195,8 @@ main#chat {
   footer {
     font-size: 0.7rem;
     padding: 0.4rem 0.1rem;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
 }
 
@@ -208,5 +212,7 @@ main#chat {
   footer {
     font-size: 0.7rem;
     padding: 0.4rem 0.1rem;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
 }
