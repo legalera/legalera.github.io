@@ -174,7 +174,7 @@ main#chat {
 @media (max-width: 600px) {
   .chat-container {
     max-width: 100vw;
-    border-radius: 0;
+    border-radius: 14px;
     height: 95vh;
     min-height: 220px;
   }
@@ -195,8 +195,8 @@ main#chat {
   footer {
     font-size: 0.7rem;
     padding: 0.4rem 0.1rem;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
   }
 }
 
@@ -212,7 +212,7 @@ main#chat {
   footer {
     font-size: 0.7rem;
     padding: 0.4rem 0.1rem;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
   }
 }
