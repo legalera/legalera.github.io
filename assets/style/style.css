@@ -23,8 +23,8 @@ footer {
   letter-spacing: 0.02em;
   /*max-width: 500px;*/
   box-sizing: border-box;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 /* Main chat container */
