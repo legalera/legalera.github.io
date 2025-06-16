@@ -113,8 +113,12 @@ function displayWelcomeMessage() {
         const updateDate = "Juni 2025"; // Disesuaikan dengan tanggal saat ini
 
         // Buat pesan yang ingin ditampilkan
-        welcomeMessageElement.innerHTML = `<strong>Lexera AI ver. ${appVersion}</strong> | <small>Diperbarui: ${updateDate}</small><small><br>Notes:<br>-Coding lebih improve dari versi sebelumnya<br>-Lexera masih berada di server pribadi Yosia Ardianto (belum publik)<br></small><br><br>Apa yang bisa saya bantu?`;
+        welcomeMessageElement.innerHTML = `<strong>Lexera AI ver. ${appVersion}</strong> | <small>Diperbarui: ${updateDate}</small><small><br>Notes:<br>-Coding lebih improve dari versi sebelumnya<br>-Lexera masih berada di server pribadi Yosia Ardianto (belum publik)</small>`;
     }
 }
 // Panggil fungsi displayWelcomeMessage saat dokumen selesai dimuat
-document.addEventListener('DOMContentLoaded', displayWelcomeMessage);
+document.addEventListener('DOMContentLoaded', () => {
+  displayWelcomeMessage(); //menampilkan versi dan info statis
+  const welcomeText = "Halo! Saya Lexera AI, asisten digital Anda untuk pertanyaan hukum di Indonesia. Silakan ketik pertanyaan Anda.";
+  addMessage(welcomeText, 'bot', true); // true agar ada efek mengetik
+});
