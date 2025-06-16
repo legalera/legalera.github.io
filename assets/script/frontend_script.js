@@ -7,8 +7,9 @@ let thinkingInterval = null;
 function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
   const prefix = sender === 'bot' ? 'Lexera AI: ' : 'Anda: ';
   let i = 0;
-
-  return new Promise(resolve => {
+  // Bersihkan konten elemen sebelum mengetik
+  element.textContent = ''; 
+  //
   function typing() {
     if (i <= message.length) {
       element.textContent = prefix + message.slice(0, i);
@@ -19,29 +20,26 @@ function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
     }
   }
   typing();
-});
 }
 
-async function addMessage(message, sender = 'user', useTypewriter = false) {
+function addMessage(message, sender = 'user', useTypewriter = false) {
   const row = document.createElement('div');
   row.className = 'message-row';
 
   const bubble = document.createElement('div');
   bubble.className = 'message-bubble ' + (sender === 'bot' ? 'bot' : 'user');
+  //Selalu tambahkan ke DOM duluan
+  row.appendChild(bubble);
+  chatWindow.appendChild(row);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
   
   if (sender === 'bot' && useTypewriter) {
-    row.appendChild(bubble);
-    chatWindow.appendChild(row);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-    await typeWriterEffect(bubble, message, sender);
+    typeWriterEffect(bubble, message, sender);
   } else {
     const prefix = sender === 'bot' ? '**Lexera AI:** ' : '**Anda:** ';
     bubble.innerHTML = marked.parse(prefix + (message || ""));
-    row.appendChild(bubble);
-    chatWindow.appendChild(row);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
   }
-    return row;
+    return row;//kembalikan ke row agar bisa showThinkingAnimation lagi
 }
 
 // NEW: Animated reasoning/thinking message
@@ -49,6 +47,10 @@ function showThinkingAnimation() {
   const thinkingRow = addMessage('Sedang menganalisis', 'bot');
   const bubble = thinkingRow.querySelector('.message-bubble');
   let dots = 0;
+  //Hapus interval sebelumnya untuk mencegah duplikasi
+  if (thinkingInterval) {
+    clearInterval(thinkingInterval);
+  }
   thinkingInterval = setInterval(() => {
     dots = (dots + 1) % 4;
     bubble.textContent = 'Lexera AI sedang menganalisis' + '.'.repeat(dots);
@@ -73,6 +75,10 @@ sendBtn.onclick = async () => {
       body: JSON.stringify({ message })
     });
     const data = await res.json();
+    // Selalu bersihkan interval thinking saat respons diterima atau error
+    clearInterval(thinkingInterval);
+    thinkingInterval = null; // Reset interval id
+    
     if (!res.ok) {
         let errorMessage = 'Terjadi kesalahan saat berkomunikasi dengan Lexera AI.';
         if (data.error && data.details) {
@@ -98,13 +104,9 @@ sendBtn.onclick = async () => {
      console.error(`Handler Error:`, err); // Log error lebih detail
      addMessage(`Maaf, terjadi kesalahan jaringan atau server: ${err.message}`, 'bot');
   } finally { // Blok finally akan selalu dieksekusi setelah try/catch
-    clearInterval(thinkingInterval);
-    if (chatWindow.contains(thinkingRow)) { // Cek elemen masih ada sebelum dihapus
-        chatWindow.removeChild(thinkingRow);
-    }
     inputBox.disabled = false;
     sendBtn.disabled = false;
-}
+    }
 };
 
 inputBox.addEventListener('keydown', e => {
@@ -112,7 +114,7 @@ inputBox.addEventListener('keydown', e => {
 });
 
 // Menampilkan pesan pembuka
-async function displayWelcomeMessage() {
+function displayWelcomeMessage() {
   // Isi pesan pembuka Anda
   const appVersion = "alpha-0.4";
   const updateDate = "Juni 2025"; // Disesuaikan dengan tanggal saat ini
@@ -124,11 +126,11 @@ async function displayWelcomeMessage() {
   
   **Notes:**  
   -Coding lebih improve dari versi sebelumnya  
-  -Lexera masih berada di server pribadi Yosia Ardianto (belum publik)  `;
-  const welcomeText = "Halo! Saya Lexera AI, asisten digital Anda untuk pertanyaan hukum di Indonesia. Silakan ketik pertanyaan Anda.";
-  await addMessage(initNotesText, 'bot', true);//tunggu selesai
-  await new Promise(resolve => setTimeout(resolve, 500)); // jeda 0.5 detik
-  await addMessage(welcomeText, 'bot', true); // selesai
+  -Lexera masih berada di server pribadi Yosia Ardianto (belum publik)  
+  ---  
+    
+  **Halo! Saya Lexera AI, asisten hukum digital Anda. Ada yang bisa Lexera bantu?**`;
+  addMessage(initNotesText, 'bot', true);//tunggu selesai
   }
 // Panggil fungsi displayWelcomeMessage saat dokumen selesai dimuat
 document.addEventListener('DOMContentLoaded', () => {
