@@ -106,16 +106,17 @@ inputBox.addEventListener('keydown', e => {
 
 // Menampilkan pesan pembuka
 function displayWelcomeMessage() {
-    const welcomeMessageElement = document.getElementById('welcomeMessage');
-    if (welcomeMessageElement) {
-        // Isi pesan pembuka Anda
-        const appVersion = "alpha-0.4";
-        const updateDate = "Juni 2025"; // Disesuaikan dengan tanggal saat ini
-
-        // Buat pesan yang ingin ditampilkan
-        welcomeMessageElement.innerHTML = `<strong>Lexera AI ver. ${appVersion}</strong> | <small>Diperbarui: ${updateDate}</small><small><br>Notes:<br>-Coding lebih improve dari versi sebelumnya<br>-Lexera masih berada di server pribadi Yosia Ardianto (belum publik)</small>`;
-    }
-}
+  // Isi pesan pembuka Anda
+  const appVersion = "alpha-0.4";
+  const updateDate = "Juni 2025"; // Disesuaikan dengan tanggal saat ini
+  // Buat pesan yang ingin ditampilkan
+  const initNotesText= `**Lexera AI ver. ${appVersion}** 
+  _Diperbarui: ${updateDate}_
+  _Notes:
+  -Coding lebih improve dari versi sebelumnya
+  -Lexera masih berada di server pribadi Yosia Ardianto (belum publik)_`;
+  addMessage(initNotesText, 'bot', true);
+  }
 // Panggil fungsi displayWelcomeMessage saat dokumen selesai dimuat
 document.addEventListener('DOMContentLoaded', () => {
   displayWelcomeMessage(); //menampilkan versi dan info statis
