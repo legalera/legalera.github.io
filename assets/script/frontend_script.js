@@ -120,13 +120,13 @@ function displayWelcomeMessage() {
   const updateDate = "Juni 2025"; // Disesuaikan dengan tanggal saat ini
   // Buat pesan yang ingin ditampilkan
   const initNotesText= `**versi ${appVersion}**  
-  _Diperbarui: ${updateDate}_  
+  *Diperbarui: ${updateDate}*  
   ---  
-  _Notes:_  
-  -Coding lebih improve dari versi sebelumnya  
-  -Lexera masih berada di server pribadi Yosia Ardianto (belum publik)  
-  ---  
-  **Halo! Saya Lexera AI, asisten hukum digital Anda. Ada yang bisa Lexera bantu?**`;
+  Notes:  
+  - Coding lebih improve dari versi sebelumnya
+  - Lexera masih berada di server pribadi Yosia Ardianto (belum publik)
+  
+  Halo! Saya **Lexera AI**, asisten hukum digital Anda. Ada yang bisa Lexera bantu?`;
   addMessage(initNotesText, 'bot', true);//tunggu selesai
   }
 // Panggil fungsi displayWelcomeMessage saat dokumen selesai dimuat
