@@ -121,10 +121,14 @@ function displayWelcomeMessage() {
   // Buat pesan yang ingin ditampilkan
   const initNotesText= `**versi ${appVersion}**
   *Diperbarui: ${updateDate}*
+  
   ---
+  
   Notes:  
   - Coding lebih improve dari versi sebelumnya
   - Lexera masih berada di server pribadi Yosia Ardianto (belum publik)
+
+  ---
   
   Halo! Saya **Lexera AI**, asisten hukum digital Anda. Ada yang bisa Lexera bantu?`;
   addMessage(initNotesText, 'bot', true);//tunggu selesai
