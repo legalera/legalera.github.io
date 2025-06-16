@@ -119,8 +119,8 @@ function displayWelcomeMessage() {
   const appVersion = "alpha-0.4";
   const updateDate = "Juni 2025"; // Disesuaikan dengan tanggal saat ini
   // Buat pesan yang ingin ditampilkan
-  const initNotesText= `**versi ${appVersion}**  
-  *Diperbarui: ${updateDate}*  
+  const initNotesText= `**versi ${appVersion}**
+  *Diperbarui: ${updateDate}*
   ---  
   Notes:  
   - Coding lebih improve dari versi sebelumnya
