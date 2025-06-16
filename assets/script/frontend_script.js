@@ -121,7 +121,7 @@ function displayWelcomeMessage() {
   // Buat pesan yang ingin ditampilkan
   const initNotesText= `**versi ${appVersion}**
   *Diperbarui: ${updateDate}*
-  ---  
+  ---
   Notes:  
   - Coding lebih improve dari versi sebelumnya
   - Lexera masih berada di server pribadi Yosia Ardianto (belum publik)
