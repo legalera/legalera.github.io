@@ -78,6 +78,7 @@ sendBtn.onclick = async () => {
     // Selalu bersihkan interval thinking saat respons diterima atau error
     clearInterval(thinkingInterval);
     thinkingInterval = null; // Reset interval id
+    thinkingRow.remove();//Hapus animasi
     
     if (!res.ok) {
         let errorMessage = 'Terjadi kesalahan saat berkomunikasi dengan Lexera AI.';
@@ -116,8 +117,8 @@ inputBox.addEventListener('keydown', e => {
 // Menampilkan pesan pembuka
 function displayWelcomeMessage() {
   // Isi pesan pembuka Anda
-  const appVersion = "alpha-0.4";
-  const updateDate = "Juni 2025"; // Disesuaikan dengan tanggal saat ini
+  const appVersion = "alpha-0.5";
+  const updateDate = "19/Juni/2025"; // Disesuaikan dengan tanggal saat ini
   // Buat pesan yang ingin ditampilkan
   const initNotesText= `**versi ${appVersion}**
   *Diperbarui: ${updateDate}*
