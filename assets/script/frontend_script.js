@@ -3,36 +3,28 @@ const inputBox = document.getElementById('input');
 const sendBtn = document.getElementById('send');
 
 let thinkingInterval = null;
-function chunkTextByWords(text, wordsPerChunk = 20) {//tiap chunk kata akan eksekusi marked parse
-  const words = text.split(" ");
-  const chunks = [];
-  for (let i = 0; i < words.length; i += wordsPerChunk) {
-    const chunk = words.slice(i, i + wordsPerChunk).join(" ");
-    chunks.push(chunk);
-  }
-  return chunks;
+
+function splitMarkdownBySentence(text) {//eksekusi markdown
+  const sentences = text.match(/[^.!?]+[.!?]+[\])'"`’”]*|.+/g); // Pecah per kalimat
+  return sentences || [text]; // fallback jika regex gagal
 }
-function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
+
+function typeWriterEffect(element, message, sender = 'bot', speed = 1000) {
   const prefix = sender === 'bot' ? '**Lexera AI:** ' : '**Anda:** ';
-  const chunks = chunkTextByWords(message, 20); // Pisahkan tiap 20 kata (chunk)
+  const chunks = splitMarkdownBySentence(message);
   let i = 0;
-  // Bersihkan konten elemen sebelum mengetik
-  element.textContent = ''; 
-  //
-  function typingChunk() {
+  element.innerHTML = marked.parse(prefix); // Awali dengan prefix saja
+
+  function renderNextChunk() {//render dalam typewritereffect
     if (i < chunks.length) {
-      const current = chunks[i];
-      const span = document.createElement('span');
-      span.innerHTML = marked.parse(current);
-      span.style.display = 'block';
-      span.style.marginBottom = '0.7em';
-      element.appendChild(span);
+      const nextHTML = marked.parse(chunks[i]);
+      element.innerHTML += nextHTML;
       chatWindow.scrollTop = chatWindow.scrollHeight;
       i++;
-      setTimeout(typingChunk, speed);
+      setTimeout(renderNextChunk, speed);
     }
   }
-  typingChunk();//marked parse tiap chunk
+  renderNextChunk();//render next chunk
 }
 
 function addMessage(message, sender = 'user', useTypewriter = false) {
