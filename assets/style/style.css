@@ -221,22 +221,11 @@ main#chat {
     /*border-bottom-left-radius: 14px;
     border-bottom-right-radius: 14px;*/
   }
-}
-
-/* For very large screens (Full HD and up) */
-@media (min-width: 1101px) {
-  .chat-container {
-    max-width: 848px;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    height: 100vh;
-    min-height: 620px;
-    border-radius: 14px;
-  }
-  footer {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.1rem;
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
-  }
+  .logo {
+  max-height: 32px;
+  width: auto;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); /* Bayangan natural */
+  transition: all 0.3s ease-in-out;
 }
