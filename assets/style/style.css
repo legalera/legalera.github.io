@@ -26,9 +26,18 @@ footer {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
 .logo {
-  width: 150px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* bayangan halus */
   transition: all 0.3s ease-in-out;
 }
 .logo:hover {
