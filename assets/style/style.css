@@ -45,7 +45,7 @@ footer {
 }
 /* Main chat container */
 .chat-container {
-  max-width: 500px;
+  max-width: 720px;
   margin: 0 auto;
   background: #fff;
   height: 95vh;
@@ -107,20 +107,20 @@ main#chat {
 
 .message-bubble.user {
   align-self: flex-end;
-  background: #c7f7f7;
-  color: #003b3b;
+  background: #bc0e0e;
+  color: #fff;
 }
 
 .message-bubble.bot {
   align-self: flex-start;
-  background: #e8eaf6;
-  color: #241f46;
+  background: #1e1d1d;
+  color: #fff;
 }
 
 /* Markdown-style code and lists */
 .message-bubble pre,
 .message-bubble code {
-  background: #16181e;
+  background: #000;
   color: #9cdcfe;
   padding: 8px;
   border-radius: 6px;
@@ -145,7 +145,7 @@ main#chat {
   display: flex;
   padding: 1rem;
   background: #fff;
-  border-top: 5px solid #ff6600;
+  border-top: 5px solid #bc0e0e;
   gap: 0.6em;
   box-sizing: border-box;
 }
@@ -169,7 +169,7 @@ main#chat {
 
 #send {
   flex: 0 0 auto;
-  background: #ff6600;
+  background: #bc0e0e;
   color: #fff;
   border: none;
   border-radius: 20px;
