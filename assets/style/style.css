@@ -27,6 +27,13 @@ footer {
   border-bottom-right-radius: 0px;
 }
 
+.logo {
+  width: 150px;
+  transition: all 0.3s ease-in-out;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
 /* Main chat container */
 .chat-container {
   max-width: 500px;
