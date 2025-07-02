@@ -3,23 +3,36 @@ const inputBox = document.getElementById('input');
 const sendBtn = document.getElementById('send');
 
 let thinkingInterval = null;
-
+function chunkTextByWords(text, wordsPerChunk = 20) {//tiap chunk kata akan eksekusi marked parse
+  const words = text.split(" ");
+  const chunks = [];
+  for (let i = 0; i < words.length; i += wordsPerChunk) {
+    const chunk = words.slice(i, i + wordsPerChunk).join(" ");
+    chunks.push(chunk);
+  }
+  return chunks;
+}
 function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
-  const prefix = sender === 'bot' ? 'Lexera AI: ' : 'Anda: ';
+  const prefix = sender === 'bot' ? '**Lexera AI:** ' : '**Anda:** ';
+  const chunks = chunkTextByWords(message, 20); // Pisahkan tiap 20 kata (chunk)
   let i = 0;
   // Bersihkan konten elemen sebelum mengetik
   element.textContent = ''; 
   //
-  function typing() {
-    if (i <= message.length) {
-      element.textContent = prefix + message.slice(0, i);
+  function typingChunk() {
+    if (i < chunks.length) {
+      const current = chunks[i];
+      const span = document.createElement('span');
+      span.innerHTML = marked.parse(current);
+      span.style.display = 'block';
+      span.style.marginBottom = '0.7em';
+      element.appendChild(span);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
       i++;
-      setTimeout(typing, speed);
-    } else {
-      element.innerHTML = marked.parse((sender === 'bot' ? '**Lexera AI:** ' : '**Anda:** ') + message);
+      setTimeout(typingChunk, speed);
     }
   }
-  typing();
+  typingChunk();//marked parse tiap chunk
 }
 
 function addMessage(message, sender = 'user', useTypewriter = false) {
