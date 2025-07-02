@@ -118,8 +118,8 @@ inputBox.addEventListener('keydown', e => {
 // Menampilkan pesan pembuka
 function displayWelcomeMessage() {
   // Isi pesan pembuka Anda
-  const appVersion = "alpha-0.5";
-  const updateDate = "19/Juni/2025"; // Disesuaikan dengan tanggal saat ini
+  const appVersion = "alpha-0.8";
+  const updateDate = "2/Juli/2025"; // Disesuaikan dengan tanggal saat ini
   // Buat pesan yang ingin ditampilkan
   const initNotesText= `**versi ${appVersion}**
   *Diperbarui: ${updateDate}*
