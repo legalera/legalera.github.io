@@ -4,27 +4,29 @@ const sendBtn = document.getElementById('send');
 
 let thinkingInterval = null;
 
-function splitMarkdownBySentence(text) {//eksekusi markdown
-  const sentences = text.match(/[^.!?]+[.!?]+[\])'"`’”]*|.+/g); // Pecah per kalimat
-  return sentences || [text]; // fallback jika regex gagal
-}
-
-function typeWriterEffect(element, message, sender = 'bot', speed = 1000) {
+function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
   const prefix = sender === 'bot' ? '**Lexera AI:** ' : '**Anda:** ';
-  const chunks = splitMarkdownBySentence(message);
+  let fullText = prefix + message; // simpan teks penuh (termasuk prefix)
   let i = 0;
-  element.innerHTML = marked.parse(prefix); // Awali dengan prefix saja
 
-  function renderNextChunk() {//render dalam typewritereffect
-    if (i < chunks.length) {
-      const nextHTML = marked.parse(chunks[i]);
-      element.innerHTML += nextHTML;
-      chatWindow.scrollTop = chatWindow.scrollHeight;
+  const tempDiv = document.createElement('div'); // tempat render sementara plain text
+  element.innerHTML = ''; // kosongkan bubble
+  element.appendChild(tempDiv); // tambahkan ke DOM
+
+  function typing() {
+    if (i <= fullText.length) {
+      // render teks sebagai plain text untuk efek ketik
+      tempDiv.textContent = fullText.slice(0, i);
       i++;
-      setTimeout(renderNextChunk, speed);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      setTimeout(typing, speed);
+    } else {
+      // Setelah selesai, render dengan Markdown biar link dan style muncul
+      element.innerHTML = marked.parse(fullText);
     }
   }
-  renderNextChunk();//render next chunk
+
+  typing();
 }
 
 function addMessage(message, sender = 'user', useTypewriter = false) {
