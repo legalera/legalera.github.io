@@ -139,7 +139,14 @@ main#chat {
 .message-bubble p {
   margin: 6px 0;
 }
-
+.message-bubble.bot a {
+  color: #4fc3f7;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.message-bubble.bot a:hover {
+  color: #81d4fa; /* lebih terang saat hover */
+}
 /* Chat input row */
 .input-row {
   display: flex;
