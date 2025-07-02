@@ -30,7 +30,7 @@ footer {
   display: flex;
   justify-content: left;
   align-items: center;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .logo {
   max-height: 80px;
@@ -45,10 +45,10 @@ footer {
 }
 /* Main chat container */
 .chat-container {
-  max-width: 720px;
+  max-width: 1000px;
   margin: 0 auto;
   background: #fff;
-  height: 95vh;
+  height: 100vh;
   min-height: 320px;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@ footer {
 
 header {
   text-align: center;
-  padding: 1.5rem 1rem 0.5rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
 }
 
 header h1 {
@@ -224,10 +224,11 @@ main#chat {
 }
 
 /* For very large screens (Full HD and up) */
-@media (min-width: 1200px) {
+@media (min-width: 1101px) {
   .chat-container {
     max-width: 848px;
-    margin-top: 3vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     height: 100vh;
     min-height: 620px;
     border-radius: 14px;
