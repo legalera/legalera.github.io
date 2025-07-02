@@ -9,23 +9,17 @@ function typeWriterEffect(element, message, sender = 'bot', speed = 10) {
   let fullText = prefix + message; // simpan teks penuh (termasuk prefix)
   let i = 0;
 
-  const tempDiv = document.createElement('div'); // tempat render sementara plain text
-  element.innerHTML = ''; // kosongkan bubble
-  element.appendChild(tempDiv); // tambahkan ke DOM
-
   function typing() {
     if (i <= fullText.length) {
       // render teks sebagai plain text untuk efek ketik
-      tempDiv.textContent = fullText.slice(0, i);
+      const currentText = fullText.slice(0, i);
+      // Render Markdown terus-menerus sambil efek berjalan
+      element.innerHTML = marked.parse(currentText);
       i++;
       chatWindow.scrollTop = chatWindow.scrollHeight;
       setTimeout(typing, speed);
-    } else {
-      // Setelah selesai, render dengan Markdown biar link dan style muncul
-      element.innerHTML = marked.parse(fullText);
     }
   }
-
   typing();
 }
 
