@@ -33,11 +33,10 @@ footer {
   margin: 10px 0;
 }
 .logo {
-  max-height: 80px;
+  max-height: 54px;
   width: auto;
   height: auto;
   display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); /* Bayangan natural */
   transition: all 0.3s ease-in-out;
 }
 .logo:hover {
@@ -218,14 +217,11 @@ main#chat {
   footer {
     font-size: 0.7rem;
     padding: 0.4rem 0.1rem;
-    /*border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;*/
   }
   .logo {
-  max-height: 32px;
+  max-height: 48px;
   width: auto;
   height: auto;
   display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); /* Bayangan natural */
   transition: all 0.3s ease-in-out;
 }
